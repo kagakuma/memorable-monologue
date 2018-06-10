@@ -4,12 +4,11 @@ import sys
 import math
 import wave
 import random
+import pygame
+import time
 
-<<<<<<< HEAD
+
 class AutoRespond:
-=======
-class AutoRespond
->>>>>>> 5fba9067f4cdb12f148d8a79f8b35f0822c6c957
     def __init__(self, filename):
         self.output_filename = filename
 
@@ -31,7 +30,7 @@ class AutoRespond
         }
 
         p = pyaudio.PyAudio()
-
+        pygame.mixer.init()
         stream = p.open(format=FORMAT,
                         channels=CHANNELS,
                         rate=RATE,
@@ -58,6 +57,10 @@ class AutoRespond
                 isTalking = False
 
             if isTalking == False and isStarted == True and isResponded == False:
+                pygame.mixer.music.load("un.wav")
+                pygame.mixer.music.play()
+                time.sleep(1)
+                pygame.mixer.music.stop()
                 respondWord =dict[random.randrange(5)]
                 print(respondWord)
                 print(i)

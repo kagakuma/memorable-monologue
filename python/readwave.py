@@ -1,20 +1,24 @@
 import pyaudio
 import wave
-
+import time
 
 class ReadWave:
     def __init__(self, filename):
         self.filename = filename
+        self.wf = wave.open(self.filename, 'rb')
+
+    def callback(self,in_data, frame_count, time_info, status):
+        data = self.wf.readframes(frame_count)
+        return (data, pyaudio.paContinue)
 
     def play(self):
         CHUNK = 1024
-        wf = wave.open(self.filename, 'rb')
 
         p = pyaudio.PyAudio()
 
-        stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
-                        channels=wf.getnchannels(),
-                        rate=wf.getframerate(),
+        stream = p.open(format=p.get_format_from_width(self.wf.getsampwidth()),
+                        channels=self.wf.getnchannels(),
+                        rate=self.wf.getframerate(),
                         output=True)
 
         """ 
@@ -24,13 +28,11 @@ class ReadWave:
            output  : 出力モード
 
         """
+        stream.start_stream()
 
-        # 1024個読み取り
-        data = wf.readframes(CHUNK)
-
-        while data != '':
-            stream.write(data)  # ストリームへの書き込み(バイナリ)
-            data = wf.readframes(CHUNK)  # ファイルから1024個*2個の
+        while stream.is_active():
+            print("while")
+            time.sleep(0.1)
 
         stream.stop_stream()
         stream.close()
