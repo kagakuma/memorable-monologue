@@ -5,7 +5,11 @@ import math
 import wave
 import random
 
+<<<<<<< HEAD
 class AutoRespond:
+=======
+class AutoRespond
+>>>>>>> 5fba9067f4cdb12f148d8a79f8b35f0822c6c957
     def __init__(self, filename):
         self.output_filename = filename
 
