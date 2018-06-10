@@ -5,7 +5,7 @@ import math
 import wave
 import random
 
-class DetectTalking:
+class AutoRespond
     def __init__(self, filename):
         self.output_filename = filename
 
@@ -75,6 +75,6 @@ class DetectTalking:
 
 
 if __name__ == "__main__":
-    detector = DetectTalking("detect.wav")
-    detector.record()
+    responder = AutoRespond("detect.wav")
+    responder.record()
 
