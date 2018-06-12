@@ -2,6 +2,7 @@ import pyaudio
 import wave
 import time
 
+
 class ReadWave:
     def __init__(self, filename):
         self.filename = filename

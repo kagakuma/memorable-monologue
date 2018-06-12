@@ -1,5 +1,5 @@
 import pyaudio
-
+import numpy as np
 CHUNK = 1024
 RATE = 44100
 p = pyaudio.PyAudio()
@@ -14,6 +14,7 @@ stream = p.open(format=pyaudio.paInt16,
 while stream.is_active():
     input = stream.read(CHUNK)
     output = stream.write(input)
+    print(np.frombuffer(input, dtype="int16"))
 
 stream.stop_stream()
 stream.close()
