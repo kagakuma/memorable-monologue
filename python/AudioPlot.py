@@ -40,6 +40,7 @@ class PlotWindow:
         if len(self.data)/1024 > 5:     #5*1024点を超えたら1024点を吐き出し
             self.data=self.data[1024:]
         self.curve.setData(self.data)   #プロットデータを格納
+        print(self.data.size)
 
     def StreamRead(self):
         return self.stream.read(self.CHUNK)
