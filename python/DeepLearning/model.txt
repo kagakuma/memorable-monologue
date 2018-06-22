@@ -1,0 +1,31 @@
+from keras.models import Sequential
+from keras.layers import  Dense
+#一番シンプルなやつ
+from keras.layers.recurrent import SimpleRNN
+from keras.layers.recurrent import LSTM, GRU #改良版
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+from keras.layers import Conv1D, MaxPooling1D
+model = Sequential()
+# ネットワーク構成
+input_shape=(max_len, dim)
+print(input_shape)
+print(max_len)
+model.add(Conv1D(64, 3, activation='relu', input_shape=input_shape))
+model.add(Conv1D(64, 3, activation='relu'))
+model.add(MaxPooling1D(3))
+model.add(Conv1D(128, 3, activation='relu'))
+model.add(Conv1D(128, 3, activation='relu'))
+model.add(MaxPooling1D(3))
+model.add(Dense(256, activation='relu'))
+model.add(Dropout(0.5))
+#model.add(SimpleRNN(units=64, kernel_initializer="random_uniform",input_shape=input_shape))
+model.add(LSTM(units=64,return_sequences=True))
+model.add(LSTM(units=64,return_sequences=True))
+model.add(LSTM(units=64))
+#model.add(GRU(units=64, input_shape=input_shape))
+
+model.add(Dense(input_shape[1],activation="linear"))
+# optimizerの設定
+from keras.optimizers import Adam
+model.compile(loss="mse", optimizer=Adam())
